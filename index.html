@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Whisperer: Turn every inspection into a living digital twin</title>
+    <meta name="description" content="Inspectors speak and snap, AI drafts a standards-compliant report in minutes. Buyers and agents get a clear, interactive view. Start the pilot in New York and Charlotte.">
+    <meta name="keywords" content="home inspection software, AI home inspection, InterNACHI, ASHI, digital twin of the home, Carfax for homes, inspection report generator, realtor dashboard">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="House Whisperer: Digital Twin for Every Home">
+    <meta property="og:description" content="Turn every inspection into a living digital twin. AI-powered reports in minutes.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/assets/og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Critical CSS - Above the fold styles */
+        :root {
+            --primary: #0E6FFF;
+            --primary-dark: #0056D6;
+            --primary-light: #E7F2FF;
+            --secondary: #111827;
+            --accent: #22C55E;
+            --accent-glow: rgba(34, 197, 94, 0.2);
+            --bg: #FFFFFF;
+            --bg-gray: #F9FAFB;
+            --text: #111827;
+            --text-muted: #6B7280;
+            --border: #E5E7EB;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --radius: 0.5rem;
+            --radius-lg: 0.75rem;
+            --max-width: 1280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography System */
+        h1 { 
+            font-size: clamp(2.5rem, 5vw, 4rem); 
+            font-weight: 800; 
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        h2 { 
+            font-size: clamp(2rem, 4vw, 3rem); 
+            font-weight: 700; 
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+        
+        h3 { 
+            font-size: clamp(1.5rem, 3vw, 2rem); 
+            font-weight: 600; 
+            line-height: 1.3;
+        }
+        
+        h4 { 
+            font-size: 1.25rem; 
+            font-weight: 600; 
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(14, 111, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(14, 111, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg);
+            color: var(--primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-gray);
+            border-color: var(--primary);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--accent), #16A34A);
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(34, 197, 94, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(180deg, var(--bg) 0%, var(--bg-gray) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subhead {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-top: 2rem;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .badge-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--accent);
+        }
+
+        /* Product Cards */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .product-card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.75rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-xl);
+            border: 2px solid var(--primary);
+        }
+
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 1rem 0;
+        }
+
+        .price-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Pilot Section */
+        .pilot-section {
+            background: linear-gradient(135deg, var(--primary-light), var(--bg-gray));
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pilot-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .pilot-spots {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .spot-counter {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .spot-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .spot-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            margin: 3rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%236B7280' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mt-4 { margin-top: 2rem; }
+        .mt-5 { margin-top: 3rem; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mb-5 { margin-bottom: 3rem; }
+        .section { padding: 4rem 0; }
+        .section-gray { background: var(--bg-gray); }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 6rem 0 3rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .trust-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .pilot-spots {
+                flex-direction: column;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Testimonial Cards */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary-light);
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            position: relative;
+            z-index: 1;
+            padding-top: 1rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-source {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            background: white;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Notification Banner */
+        .notification-banner {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: white;
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .notification-banner a {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification Banner -->
+    <div class="notification-banner">
+        🚀 Limited pilot spots available in New York and Charlotte. <a href="#pilot">Apply now</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">HW</div>
+                House Whisperer
+            </a>
+            <div class="nav-links">
+                <a href="#how-it-works">How it Works</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#pilot">Pilot</a>
+                <a href="#contact" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content animate-in">
+                <h1>From inspection to digital twin in minutes</h1>
+                <p class="hero-subhead">
+                    Speak and snap on-site. House Whisperer drafts a standards-compliant report and builds a living record buyers and agents can actually use.
+                </p>
+                <div class="hero-cta">
+                    <a href="#pilot" class="btn btn-primary">
+                        <span>Join the Pilot</span>
+                        <span class="loader" style="display: none;"></span>
+                    </a>
+                    <a href="#sample" class="btn btn-secondary">See a Sample Report</a>
+                </div>
+                <div class="trust-badges">
+                    <div class="badge">
+                        <svg class="badge-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        InterNACHI/ASHI Standards-Aware
+                    </div>
+                    <div class="badge">
+                        <svg class="badge-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                        </svg>
+                        Built by Ex-Morgan Stanley & Bank of America AI
+                    </div>
+                    <div class="badge">
+                        <svg class="badge-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm9 0a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0V6h-1a1 1 0 110-2h1V3a1 1 0 011-1zM5 11a2 2 0 100 4 2 2 0 000-4zm9 0a2 2 0 100 4 2 2 0 000-4z" clip-rule="evenodd"/>
+                        </svg>
+                        AI Makerspace Demo Day Featured
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Validated Pain Points from Customer Interviews -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">What We Learned from Inspector Interviews</h2>
+            <p class="text-center mb-4" style="max-width: 700px; margin: 0 auto; color: var(--text-muted);">
+                We interviewed licensed inspectors in New York and Charlotte to understand their biggest challenges
+            </p>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">The 3-5 Hour Problem</h4>
+                    <p class="testimonial-text" style="font-style: normal;">
+                        Every single inspector we interviewed spends 3 to 5 hours after each inspection writing reports. That's unpaid desk time that could be spent on another inspection.
+                    </p>
+                    <p class="testimonial-source">Validated across 3 inspector interviews</p>
+                </div>
+                <div class="testimonial-card">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Template Frustration</h4>
+                    <p class="testimonial-text" style="font-style: normal;">
+                        Complex narrative libraries and templates still require extensive manual editing. Inspectors told us they're essentially rewriting the same findings over and over.
+                    </p>
+                    <p class="testimonial-source">Common pain point in all interviews</p>
+                </div>
+                <div class="testimonial-card">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">The Follow-up Call Burden</h4>
+                    <p class="testimonial-text" style="font-style: normal;">
+                        Inspectors receive multiple follow-up calls from buyers and agents who can't understand the technical jargon in standard reports.
+                    </p>
+                    <p class="testimonial-source">Reported by every inspector interviewed</p>
+                </div>
+                <div class="testimonial-card">
+                    <h4 style="color: var(--accent); margin-bottom: 1rem;">Agent & Buyer Perspective</h4>
+                    <p class="testimonial-text" style="font-style: normal;">
+                        50-page PDFs full of technical terms make it hard for buyers to understand what actually matters and what needs immediate attention.
+                    </p>
+                    <p class="testimonial-source">Validated through agent conversations</p>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <h3 style="color: var(--secondary); margin-bottom: 1rem;">House Whisperer solves every one of these problems</h3>
+                <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+                    Finish reports before you leave the driveway. Give buyers clarity. Build the home's digital twin.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Sections -->
+    <section class="section section-gray">
+        <div class="container">
+            <h2 class="text-center mb-3">Built for Everyone in the Transaction</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>For Inspectors</h3>
+                    <p class="mb-3">Stop typing. Start finishing jobs on-site.</p>
+                    <ul class="feature-list">
+                        <li>Speak and snap: capture voice notes and photos in-app</li>
+                        <li>AI drafts a standards-compliant report in minutes</li>
+                        <li>Auto narrative generation replaces static libraries</li>
+                        <li>Reduce follow-up calls with buyer-friendly explanations</li>
+                    </ul>
+                    <a href="#pilot" class="btn btn-primary">Get Early Access</a>
+                </div>
+                <div class="product-card">
+                    <h3>For Agents and Buyers</h3>
+                    <p class="mb-3">Finally, inspection reports that make sense.</p>
+                    <ul class="feature-list">
+                        <li>Plain-English summaries for each finding</li>
+                        <li>Interactive dashboard for quotes and repair tracking</li>
+                        <li>Single link to share with sellers, lenders, and insurers</li>
+                        <li>Be ready to negotiate faster with clear, structured data</li>
+                    </ul>
+                    <a href="#sample" class="btn btn-secondary">Request a Sample</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section" id="how-it-works">
+        <div class="container">
+            <h2 class="text-center mb-3">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>Capture</h4>
+                    <p>Inspectors record voice notes and photos in the app. No typing required.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>Draft</h4>
+                    <p>AI maps observations to InterNACHI/ASHI sections and generates narratives.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>Explain</h4>
+                    <p>Explainer Bot turns findings into plain English for buyers and agents.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4>Track</h4>
+                    <p>Dashboard tracks quotes, repairs, and documents — the home's memory begins.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section section-gray" id="features">
+        <div class="container">
+            <h2 class="text-center mb-3">Powerful Features for Modern Inspections</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h4>Standards-aware AI</h4>
+                    <p>Uses inspection standards as a data schema to structure every finding.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h4>Explainer Bot</h4>
+                    <p>Automatically answers buyer and agent questions in clear language.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h4>Photo + Voice Multimodal</h4>
+                    <p>Whisper/STT + vision prompts for accurate, fast drafting.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2H6a2 2 0 00-2 2v6a2 2 0 002 2h2a1 1 0 100 2H6a4 4 0 01-4-4V7a4 4 0 014-4h3a1 1 0 110 2H6z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h4>Report Templates, Evolved</h4>
+                    <p>AI narratives replace static libraries; edit and publish in minutes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                        </svg>
+                    </div>
+                    <h4>Buyer/Realtor Delivery</h4>
+                    <p>Interactive view with timelines, follow-ups, and repair tracking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h4>Digital Twin</h4>
+                    <p>Each inspection enriches a persistent record that travels with the property.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <h2 class="text-center mb-1">Simple pricing that respects your time</h2>
+            <p class="text-center mb-4">No setup fees. No hidden costs. Cancel anytime.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card featured">
+                    <h3>Inspector</h3>
+                    <div class="price">$99<span style="font-size: 1rem; font-weight: 400;">/mo</span></div>
+                    <p class="price-note">Per inspector, cancel anytime</p>
+                    <ul class="feature-list">
+                        <li>Unlimited draft reports</li>
+                        <li>Standards-aware narratives</li>
+                        <li>Explainer Bot for buyers/agents</li>
+                        <li>Photo + voice capture</li>
+                    </ul>
+                    <a href="#pilot" class="btn btn-primary" style="width: 100%;">Join Pilot at $99/mo</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Team</h3>
+                    <div class="price">Contact</div>
+                    <p class="price-note">For multi-inspector firms and franchises</p>
+                    <ul class="feature-list">
+                        <li>Everything in Inspector</li>
+                        <li>Shared templates and analytics</li>
+                        <li>Realtor delivery branding</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary" style="width: 100%;">Talk to Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pilot Section -->
+    <section class="section" id="pilot">
+        <div class="container">
+            <div class="pilot-section">
+                <div class="text-center">
+                    <span class="pilot-badge">🚀 LIMITED PILOT</span>
+                    <h2>Join the Revolution in Home Inspection</h2>
+                    <p class="mb-3">Be among the first to transform your inspection business</p>
+                    
+                    <div class="pilot-spots">
+                        <div class="spot-counter">
+                            <div class="spot-number">7/10</div>
+                            <div class="spot-label">Spots remaining in New York</div>
+                        </div>
+                        <div class="spot-counter">
+                            <div class="spot-number">5/10</div>
+                            <div class="spot-label">Spots remaining in Charlotte</div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mt-4">Eligibility Requirements:</h4>
+                    <ul style="list-style: none; text-align: left; max-width: 500px; margin: 1rem auto;">
+                        <li style="padding: 0.5rem 0;">✓ Active license and E&O insurance</li>
+                        <li style="padding: 0.5rem 0;">✓ Willing to share anonymized usage feedback</li>
+                        <li style="padding: 0.5rem 0;">✓ Complete at least 5 inspections per month</li>
+                    </ul>
+                    
+                    <a href="#apply-form" class="btn btn-success mt-3">Apply to the Pilot</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Section -->
+    <section class="section section-gray" id="sample">
+        <div class="container">
+            <h2 class="text-center mb-3">See it in action</h2>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="/assets/sample-report.pdf" class="btn btn-primary">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20" style="margin-right: 0.5rem;">
+                        <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/>
+                    </svg>
+                    View Sample Report
+                </a>
+                <a href="https://house-whisperer-demoday.vercel.app" class="btn btn-secondary">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20" style="margin-right: 0.5rem;">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                    </svg>
+                    Watch 2 min Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founders Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">Built by Industry Veterans</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>Raghu Challapilla</h3>
+                    <p style="color: var(--primary); font-weight: 600; margin-bottom: 1rem;">CEO</p>
+                    <p>Led enterprise AI portfolio at Bank of America; co-led Erica for Employees (Forrester award). Product and GTM.</p>
+                    <a href="https://www.linkedin.com/in/..." style="color: var(--primary); text-decoration: none;">LinkedIn →</a>
+                </div>
+                <div class="product-card">
+                    <h3>Nilay Jhaveri</h3>
+                    <p style="color: var(--primary); font-weight: 600; margin-bottom: 1rem;">CTO</p>
+                    <p>20 years building compliance-grade systems at Morgan Stanley and Galaxy Digital; repeat startup builder. AI and data infra.</p>
+                    <a href="https://www.linkedin.com/in/..." style="color: var(--primary); text-decoration: none;">LinkedIn →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section section-gray">
+        <div class="container">
+            <h2 class="text-center mb-3">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Which standards do you support?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>InterNACHI and ASHI. We map findings to standards sections and generate compliant narratives you can edit.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I keep my photos and comments private until I publish?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes. You control when a draft is shared with clients or agents.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will buyers and agents see everything?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You choose what's visible. The buyer/agent view is curated for clarity.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Does this replace my current software?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Use House Whisperer standalone or alongside existing tools during pilot. Most inspectors switch after a few jobs.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Where is it available?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pilots in New York and Charlotte now; more regions soon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="text-center mb-1">Talk to us</h2>
+            <p class="text-center mb-3">Join the pilot, ask about team plans, or request a custom demo.</p>
+            
+            <form class="contact-form" id="apply-form">
+                <div class="form-group">
+                    <label for="full_name">Full Name *</label>
+                    <input type="text" id="full_name" name="full_name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Work Email *</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="role">Role *</label>
+                    <select id="role" name="role" class="form-control" required>
+                        <option value="">Select your role</option>
+                        <option value="Inspector">Inspector</option>
+                        <option value="Broker/Agent">Broker/Agent</option>
+                        <option value="Buyer">Buyer</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="region">Region</label>
+                    <input type="text" id="region" name="region" class="form-control" placeholder="City, State">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">How can we help?</label>
+                    <textarea id="message" name="message" class="form-control"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="color: white;">
+                    <div class="logo-icon">HW</div>
+                    House Whisperer
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy">Privacy</a>
+                    <a href="/terms">Terms</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2024 House Whisperer. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+                
+                // Close other items
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Form submission
+        document.getElementById('apply-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.innerHTML = '<span class="loader"></span> Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                alert('Thank you for your interest! We\'ll be in touch within 24 hours.');
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
+        });
+
+        // Add subtle parallax to hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Add countdown animation to pilot spots
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.textContent = Math.floor(progress * (end - start) + start) + '/' + 10;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Animate pilot spots when visible
+        const pilotObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const spotNumbers = entry.target.querySelectorAll('.spot-number');
+                    spotNumbers[0] && animateValue(spotNumbers[0], 0, 7, 1000);
+                    spotNumbers[1] && animateValue(spotNumbers[1], 0, 5, 1000);
+                    pilotObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const pilotSection = document.querySelector('.pilot-spots');
+        if (pilotSection) {
+            pilotObserver.observe(pilotSection);
+        }
+    </script>
+</body>
+</html>
