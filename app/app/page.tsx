@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import {
   ArrowRight,
   BarChart3,
-  Home,
+  Home as HomeIcon,
   Building2,
   Shield,
   Clock,
@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   Zap,
   TrendingUp,
+  ExternalLink,
 } from "lucide-react"
 
 export default function Home() {
@@ -42,17 +43,20 @@ export default function Home() {
               >
                 Demo
               </Link>
-              <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-sm" asChild>
-                <Link href="https://house-whisperer-demoday.vercel.app/" target="_blank" rel="noopener noreferrer">
-                  Try Now
-                </Link>
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-sm" asChild>
+                  <Link href="https://house-whisperer-demoday.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    Join Pilot
+                  </Link>
+                </Button>
+                <Badge variant="secondary" className="text-xs hidden sm:inline-flex">Pilot Program</Badge>
+              </div>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Hero: The Problem & Vision */}
+      {/* Hero: Inspector-Focused */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
@@ -62,30 +66,33 @@ export default function Home() {
               <span className="text-sm font-medium text-primary">AI-Powered Home Inspections</span>
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 text-balance leading-tight tracking-tight">
-              Turn inspections into{" "}
+              Save{" "}
               <span className="text-primary bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-                data that lives forever
-              </span>
+                1-3 hours
+              </span>{" "}
+              per inspection
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto text-balance leading-relaxed">
-              Inspectors generate 50-page PDFs that disappear after the sale. We're building the CarFax for houses—a
-              permanent digital twin that compounds in value with every inspection.
+              Record voice notes during inspections. AI generates compliant reports in minutes—not hours. InterNACHI & ASHI standards built in.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
               <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 gap-2 group" asChild>
+                <Link href="https://house-whisperer-demoday.vercel.app/" target="_blank" rel="noopener noreferrer">
+                  Join the Pilot <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="gap-2" asChild>
                 <Link
                   href="https://www.loom.com/share/024151e3afe44348a082548262590768"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  See Demo <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  See Demo
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="gap-2" asChild>
-                <Link href="https://house-whisperer-demoday.vercel.app/" target="_blank" rel="noopener noreferrer">
-                  Try It Free
-                </Link>
-              </Button>
+            </div>
+            <div className="flex justify-center pt-2">
+              <Badge variant="secondary" className="text-xs">Pilot Program • Free for First 10 Inspectors</Badge>
             </div>
           </div>
         </div>
@@ -116,12 +123,13 @@ export default function Home() {
             </CardContent>
           </Card>
 
-          <div className="text-center mt-8">
+          <div className="text-center mt-8 space-y-3">
             <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-md gap-2" asChild>
               <Link href="https://house-whisperer-demoday.vercel.app/" target="_blank" rel="noopener noreferrer">
-                Try It Yourself <ArrowRight className="w-4 h-4" />
+                Join the Pilot <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
+            <p className="text-sm text-muted-foreground">Free for first 10 inspectors • No signup required</p>
           </div>
         </div>
       </section>
@@ -209,7 +217,7 @@ export default function Home() {
                       <div>
                         <p className="text-sm font-semibold text-primary mb-1">Result</p>
                         <p className="text-foreground">
-                          Inspectors save <strong className="text-primary">1-2+ hours</strong> per report. The data
+                          Inspectors save <strong className="text-primary">1-3 hours</strong> per report. The data
                           never disappears.
                         </p>
                       </div>
@@ -219,75 +227,6 @@ export default function Home() {
               </CardContent>
             </Card>
           </div>
-        </div>
-      </section>
-
-      {/* The Long-Term Vision */}
-      <section className="py-16 sm:py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 space-y-4">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">The Real Opportunity</h2>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
-              One inspection isn't worth much.{" "}
-              <span className="font-semibold text-foreground">A home's inspection history is invaluable.</span>
-            </p>
-          </div>
-
-          <Card className="bg-gradient-to-br from-primary/10 via-primary/5 to-background border-2 border-primary/20 shadow-xl">
-            <CardContent className="p-6 sm:p-8 md:p-12">
-              <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-                <Card className="bg-card/50 backdrop-blur-sm border hover:shadow-lg transition-all duration-300 hover:scale-105">
-                  <CardHeader>
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                      <Home className="w-6 h-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">For Buyers</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      Interactive dashboards that explain inspections in plain English. Track repairs over time.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card className="bg-card/50 backdrop-blur-sm border hover:shadow-lg transition-all duration-300 hover:scale-105">
-                  <CardHeader>
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                      <Building2 className="w-6 h-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">For Real Estate Agents</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      Lifetime property records that follow homes through multiple sales. Competitive advantage.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card className="bg-card/50 backdrop-blur-sm border hover:shadow-lg transition-all duration-300 hover:scale-105">
-                  <CardHeader>
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                      <Shield className="w-6 h-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">For Insurers & Service Providers</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      Structured, machine-readable home data powers risk models and maintenance recommendations.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-
-              <div className="mt-8 pt-8 border-t border-primary/20 text-center space-y-3">
-                <p className="text-muted-foreground">
-                  <strong className="text-foreground">The network effect:</strong> More inspections → Better data →
-                  More valuable to everyone → More users
-                </p>
-                <p className="text-sm font-semibold text-primary">
-                  We're not automating report writing. We're building real estate's data layer.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </section>
 
@@ -344,6 +283,78 @@ export default function Home() {
         </div>
       </section>
 
+      {/* For Inspectors - Pilot Program */}
+      <section className="py-16 sm:py-20 bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 space-y-4">
+            <Badge variant="default" className="mb-2">For Inspectors</Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground">Join Our Pilot Program</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Save 1-3 hours per inspection. Free during pilot phase. No signup required—just use the app with your login.
+            </p>
+          </div>
+
+          <Card className="border-2 border-primary/30 bg-card shadow-xl">
+            <CardContent className="p-6 sm:p-8">
+              <div className="space-y-6">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground mb-1">Early Access to AI Report Generation</p>
+                    <p className="text-sm text-muted-foreground">
+                      Be among the first to experience voice-to-report automation that saves hours per inspection.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground mb-1">Free During Pilot Phase</p>
+                    <p className="text-sm text-muted-foreground">
+                      No cost to you. We're building this with you, and your feedback shapes the product.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground mb-1">Direct Feedback Channel</p>
+                    <p className="text-sm text-muted-foreground">
+                      Your voice matters. Help us build the tool that works best for real inspectors.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-primary/20">
+                  <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 text-center">
+                    <p className="text-sm font-semibold text-primary mb-2">Limited Pilot Spots</p>
+                    <p className="text-foreground font-bold text-2xl mb-1">First 10 Inspectors</p>
+                    <p className="text-xs text-muted-foreground">Free access for early adopters</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg gap-2 group" asChild>
+                    <Link href="https://house-whisperer-demoday.vercel.app/" target="_blank" rel="noopener noreferrer">
+                      Join the Pilot <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                  <Button size="lg" variant="outline" className="gap-2" asChild>
+                    <Link
+                      href="https://www.loom.com/share/024151e3afe44348a082548262590768"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Watch Demo First
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* Traction */}
       <section className="py-16 sm:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -385,14 +396,83 @@ export default function Home() {
         </div>
       </section>
 
+      {/* The Long-Term Vision */}
+      <section className="py-16 sm:py-20 bg-secondary/5">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 space-y-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">The Bigger Picture</h2>
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
+              One inspection isn't worth much.{" "}
+              <span className="font-semibold text-foreground">A home's inspection history is invaluable.</span>
+            </p>
+          </div>
+
+          <Card className="bg-gradient-to-br from-primary/10 via-primary/5 to-background border-2 border-primary/20 shadow-xl">
+            <CardContent className="p-6 sm:p-8 md:p-12">
+              <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+                <Card className="bg-card/50 backdrop-blur-sm border hover:shadow-lg transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                      <HomeIcon className="w-6 h-6 text-primary" />
+                    </div>
+                    <CardTitle className="text-xl">For Buyers</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      Interactive dashboards that explain inspections in plain English. Track repairs over time.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-card/50 backdrop-blur-sm border hover:shadow-lg transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                      <Building2 className="w-6 h-6 text-primary" />
+                    </div>
+                    <CardTitle className="text-xl">For Real Estate Agents</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      Lifetime property records that follow homes through multiple sales. Competitive advantage.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-card/50 backdrop-blur-sm border hover:shadow-lg transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                      <Shield className="w-6 h-6 text-primary" />
+                    </div>
+                    <CardTitle className="text-xl">For Insurers & Service Providers</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      Structured, machine-readable home data powers risk models and maintenance recommendations.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="mt-8 pt-8 border-t border-primary/20 text-center space-y-3">
+                <p className="text-muted-foreground">
+                  <strong className="text-foreground">The network effect:</strong> More inspections → Better data →
+                  More valuable to everyone → More users
+                </p>
+                <p className="text-sm font-semibold text-primary">
+                  We're not automating report writing. We're building real estate's data layer.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-20" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
           <div className="space-y-4">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Ready to see it work?</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Ready to join the pilot?</h2>
             <p className="text-lg sm:text-xl opacity-95 max-w-2xl mx-auto">
-              Watch a 2-minute demo or try the live app with sample inspection data.
+              Join our pilot program and start saving 1-3 hours per inspection. Free for first 10 inspectors.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -401,12 +481,8 @@ export default function Home() {
               className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-xl gap-2 group"
               asChild
             >
-              <Link
-                href="https://www.loom.com/share/024151e3afe44348a082548262590768"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                See Demo <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <Link href="https://house-whisperer-demoday.vercel.app/" target="_blank" rel="noopener noreferrer">
+                Join the Pilot <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
             <Button
@@ -415,18 +491,23 @@ export default function Home() {
               className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 bg-transparent shadow-lg"
               asChild
             >
-              <Link href="https://house-whisperer-demoday.vercel.app/" target="_blank" rel="noopener noreferrer">
-                Live App
+              <Link
+                href="https://www.loom.com/share/024151e3afe44348a082548262590768"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                See Demo First
               </Link>
             </Button>
           </div>
+          <p className="text-sm opacity-90">No signup required • Just use the app with your login</p>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="bg-card border-t border-border py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
@@ -443,7 +524,7 @@ export default function Home() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="https://house-whisperer-demoday.vercel.app/" className="hover:text-primary transition-colors">
-                    Try It Free
+                    Join the Pilot
                   </Link>
                 </li>
                 <li>
@@ -467,6 +548,65 @@ export default function Home() {
                   raghu.challapilla@alumni.ie.edu
                 </a>
               </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-foreground mb-4">Built by</h3>
+              <div className="space-y-4 text-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-12 h-12 rounded-full border-2 border-primary/20 overflow-hidden flex-shrink-0 bg-muted">
+                    <img
+                      src="/founders/raghu.png"
+                      alt="Raghu Challapilla"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback if image doesn't exist
+                        e.currentTarget.style.display = "none"
+                        e.currentTarget.parentElement!.innerHTML =
+                          '<div class="w-full h-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-xs">RC</div>'
+                      }}
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-foreground font-medium">Raghu Challapilla</p>
+                    <p className="text-muted-foreground text-xs mb-1">Co-Founder</p>
+                    <a
+                      href="https://www.linkedin.com/in/raghuscrum/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline inline-flex items-center gap-1 text-xs"
+                    >
+                      LinkedIn <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-12 h-12 rounded-full border-2 border-primary/20 overflow-hidden flex-shrink-0 bg-muted">
+                    <img
+                      src="/founders/nilay.png"
+                      alt="Nilay Jhaveri"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback if image doesn't exist
+                        e.currentTarget.style.display = "none"
+                        e.currentTarget.parentElement!.innerHTML =
+                          '<div class="w-full h-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-xs">NJ</div>'
+                      }}
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-foreground font-medium">Nilay Jhaveri</p>
+                    <p className="text-muted-foreground text-xs mb-1">Co-Founder</p>
+                    <a
+                      href="https://www.linkedin.com/in/nilay320/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline inline-flex items-center gap-1 text-xs"
+                    >
+                      LinkedIn <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
